@@ -497,3 +497,35 @@ nav.primary a.active { color: var(--blue-700); font-weight: 600; }
 }
 
 /* ─── SHARED NAV JS VARS ─────────────────────────────────────── */
+
+/* --- COOKIE BANNER --- */
+#cookie-banner {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 999;
+  background: var(--blue-900);
+  color: rgba(255,255,255,.8);
+  box-shadow: 0 -4px 20px rgba(0,0,0,.15);
+}
+.cookie-banner-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.cookie-banner-inner p { color: rgba(255,255,255,.8); font-size: .85rem; margin: 0; max-width: 640px; }
+.cookie-banner-inner p a { color: #fff; text-decoration: underline; font-weight: 600; }
+.cookie-banner-inner #cookie-accept {
+  background: var(--blue-600); color: #fff; border: none;
+  padding: 10px 22px; border-radius: var(--radius-sm);
+  font-weight: 600; font-size: .85rem; cursor: pointer; white-space: nowrap; transition: background .15s;
+}
+.cookie-banner-inner #cookie-accept:hover { background: var(--blue-800); }
+@media (max-width: 600px) {
+  .cookie-banner-inner { flex-direction: column; align-items: stretch; }
+  .cookie-banner-inner #cookie-accept { width: 100%; }
+}
