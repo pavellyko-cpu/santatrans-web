@@ -17,7 +17,7 @@
 window.ST_DATA = {
 
   /* ── CENY PALIV ────────────────────── */
-  CNG_PRICE:     "46,700",   // Kč/kg s DPH
+  CNG_PRICE:     "46,80",   // Kč/kg s DPH
   DIESEL_PRICE:  "35,10",   // Kč/l s DPH
 
   /* ── STATISTIKY (homepage) ─────────── */
