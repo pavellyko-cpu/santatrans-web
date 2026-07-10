@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kariéra — Santa-Trans s.r.o.</title>
+  <meta name="description" content="Volné pozice a kariéra v Santa-Trans s.r.o. Krnov. Pošlete nám životopis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .empty-card {
+      background: var(--gray-50);
+      border: 1px dashed var(--gray-300);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      color: var(--gray-500);
+      font-size: .9rem;
+    }
+    .empty-card a { color: var(--blue-600); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div>Nafta B7&nbsp;<strong>35,10 Kč/l</strong><span class="topbar-sep"></span>CNG&nbsp;<strong>46,70 Kč/kg</strong></div>
+    <div>Dispečink Krnov&nbsp;<a href="tel:+420724328884">+420 724 328 884</a></div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo"><img src="img/logo.png" alt="Santa-Trans"></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Otevřít menu">☰ Menu</button>
+    <nav class="primary" id="primaryNav">
+      <a href="index.html">Úvod</a>
+      <a href="sluzby.html">Služby</a>
+      <a href="kariera.html" class="active">Kariéra</a>
+      <a href="kontakty.html">Kontakty</a>
+      <a href="kontakty.html" class="nav-cta">Napište nám</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="eyebrow">Přidejte se k nám</div>
+    <h1>Kariéra</h1>
+    <p>160 zaměstnanců, 77 vozidel, tři depa po celé ČR. Hledáme řidiče, techniky i pracovníky servisu.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container" style="max-width:720px;">
+
+    <div class="eyebrow">Volné pozice</div>
+    <h2 class="section-title" style="margin-bottom:20px;">Aktuální nabídka</h2>
+    <div class="empty-card">
+      Aktuálně nemáme zveřejněné konkrétní pozice. Sledujte tuto stránku nebo nás kontaktujte na <a href="mailto:dispecink@santatrans.cz">dispecink@santatrans.cz</a> — rádi Vám poradíme.
+    </div>
+
+    <div style="height:52px;"></div>
+
+    <div class="eyebrow">Zašlete nám životopis</div>
+    <h2 class="section-title" style="margin-bottom:24px;">Nezávazná přihláška</h2>
+    <form action="mailto:dispecink@santatrans.cz" method="post" enctype="text/plain">
+      <div class="form-grid">
+        <div class="field">
+          <label for="jmeno">Jméno a příjmení</label>
+          <input id="jmeno" name="jmeno" type="text" placeholder="Jan Novák" required>
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" placeholder="jan@example.cz" required>
+        </div>
+        <div class="field full">
+          <label for="predmet">O jakou pozici máte zájem</label>
+          <input id="predmet" name="predmet" type="text" placeholder="Řidič kamionu, technik servisu…">
+        </div>
+        <div class="field full">
+          <label for="zprava">Stručné představení</label>
+          <textarea id="zprava" name="zprava" rows="5" placeholder="Pár vět o Vás, zkušenostech a dostupnosti…"></textarea>
+        </div>
+        <div class="field full">
+          <label for="cv">Přiložit CV (nepovinné)</label>
+          <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx">
+        </div>
+      </div>
+      <button type="submit" class="btn-primary" style="margin-top:16px;border:none;cursor:pointer;">Odeslat přihlášku</button>
+    </form>
+
+    <div style="height:52px;"></div>
+
+    <div class="eyebrow">Dokumenty</div>
+    <h2 class="section-title" style="margin-bottom:20px;">Ke stažení</h2>
+    <div class="doc-list">
+      <div class="doc-item">
+        <span class="doc-name">Politika kvality (2018)</span>
+        <a href="docs/PolitikaKvality2018.docx" class="doc-dl">Stáhnout .docx</a>
+      </div>
+      <div class="doc-item">
+        <span class="doc-name">GDPR — ochrana osobních údajů</span>
+        <a href="docs/GDPR.docx" class="doc-dl">Stáhnout .docx</a>
+      </div>
+    </div>
+
+    <div class="iso-block">
+      <div class="iso-seal">ISO<br>9001</div>
+      <div>
+        <h4>Certifikát ISO 9001:2016</h4>
+        <p>Potvrzuje naši oddanost kvalitě a neustálému zlepšování procesů ve společnosti Santa-Trans s.r.o.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="img/logo.png" alt="Santa-Trans"></div>
+        <p class="footer-tagline">Vnitrostátní i mezinárodní kamionová doprava. Dceřiná společnost Kofola a.s.</p>
+      </div>
+      <div>
+        <h4>Navigace</h4>
+        <a href="index.html">Úvod</a>
+        <a href="sluzby.html">Služby</a>
+        <a href="kontakty.html">Kontakty</a>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <a href="tel:+420595601320">+420 595 601 320</a>
+        <a href="mailto:dispecink@santatrans.cz">dispecink@santatrans.cz</a>
+        <a href="https://cs-cz.facebook.com/santatrans.cz/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Santa-Trans s.r.o. · Krnov</span>
+      <span>ISO 9001:2016</span>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>
