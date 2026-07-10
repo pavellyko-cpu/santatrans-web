@@ -184,14 +184,8 @@
   </div>
 </footer>
 
-<script src="data.js"></script>
+<script src="data-loader.js"></script>
 <script src="nav.js"></script>
-<script>
-if (window.ST_DATA) {
-  var d = window.ST_DATA;
-  if (d.DIESEL_PRICE) { document.getElementById('diesel-price-srv').textContent = d.DIESEL_PRICE; document.getElementById('tb-diesel').textContent = d.DIESEL_PRICE + ' Kč/l'; }
-  if (d.CNG_PRICE)    { document.getElementById('cng-price-srv').textContent    = d.CNG_PRICE;    document.getElementById('tb-cng').textContent    = d.CNG_PRICE + ' Kč/kg'; }
-}
-</script>
+
 </body>
 </html>
