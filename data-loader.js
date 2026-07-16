@@ -7,17 +7,19 @@
           set('vehicle-count',d.VEHICLES||d.V);
           set('vehicles-about',d.VEHICLES||d.V);
           set('transit-count',d.TRANSITS||d.T);
-          set('diesel-price',(d.DIESEL||d.DIESEL)+' Kc/l');
-          set('cng-price',(d.CNG||d.CNG)+' Kc/kg');
+          set('diesel-price',(d.DIESEL||d.DIESEL)+' Kč/l s DPH');
+          set('cng-price',(d.CNG||d.CNG)+' Kč/kg s DPH');
           set('diesel-price-srv',d.DIESEL);
           set('cng-price-srv',d.CNG);
-          set('tb-diesel',(d.DIESEL)+' Kc/l');
-          set('tb-cng',(d.CNG)+' Kc/kg');
+          set('tb-diesel',(d.DIESEL)+' Kč/l s DPH');
+          set('tb-cng',(d.CNG)+' Kč/kg s DPH');
     }
     function load(){
           var x=new XMLHttpRequest();
-          x.open('GET',API,true);
+          var url=API+(API.indexOf('?')>-1?'&':'?')+'_ts='+Date.now();
+          x.open('GET',url,true);
           x.timeout=5000;
+          try{x.setRequestHeader('Cache-Control','no-cache, no-store, must-revalidate');}catch(e){}
           x.onload=function(){try{apply(JSON.parse(x.responseText));}catch(e){apply(F);}};
           x.onerror=x.ontimeout=function(){apply(F);};
           x.send();
