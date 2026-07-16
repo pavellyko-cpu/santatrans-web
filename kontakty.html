@@ -4,20 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kontakty — Santa-Trans s.r.o.</title>
-  <meta name="description" content="Kontakty na vedení a jednotlivá oddělení Santa-Trans s.r.o., Krnov a Mnichovo Hradiště.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<div id="google_translate_element"></div>
 <div class="topbar">
   <div class="container">
-    <div>Nafta B7&nbsp;<strong>35,10 Kč/l</strong><span class="topbar-sep"></span>CNG&nbsp;<strong>46,70 Kč/kg</strong></div>
+    <div>Nafta B7&nbsp;<strong>35,10 Kč/l s DPH</strong><span class="topbar-sep"></span>CNG&nbsp;<strong>46,70 Kč/kg s DPH</strong></div>
     <div>Dispečink Krnov&nbsp;<a href="tel:+420724328884">+420 724 328 884</a></div>
+    <div class="lang-switch">
+      <button onclick="switchLang('en')">EN</button>
+      <button onclick="switchLang('de')">DE</button>
+      <button onclick="switchLang('pl')">PL</button>
+      <button onclick="switchLang('cs')" title="Zpět do češtiny">CS</button>
+    </div>
   </div>
 </div>
-
 <header class="site-header">
   <div class="container header-inner">
     <a href="index.html" class="logo"><img src="img/logo.png" alt="Santa-Trans"></a>
@@ -31,144 +35,56 @@
     </nav>
   </div>
 </header>
-
-<div class="page-hero">
+<section class="section-sm">
   <div class="container">
     <div class="eyebrow">Vedení a oddělení</div>
-    <h1>Kontakty</h1>
-    <p>Ve Vrbině 592/1, Pod Cvilínem, 794 01 Krnov &nbsp;·&nbsp; Po–Pá 7:00–16:00 &nbsp;·&nbsp; <a href="tel:+420554601320" style="color:var(--blue-600);font-weight:600;">+420 554 601 320</a></p>
-  </div>
-</div>
-
-<section class="section">
-  <div class="container">
-
-    <div class="dept-label">Vedení společnosti</div>
-    <div class="people-grid" id="management-grid">
-      <div class="person">
-        <div class="person-role">Ředitel</div>
-        <h4>René Novotný</h4>
-        <a href="mailto:rene.novotny@santatrans.cz">rene.novotny@santatrans.cz</a>
-        <a href="tel:+420595601345">+420 595 601 345</a>
-      </div>
-      <div class="person">
-        <div class="person-role">Manažer logistiky</div>
-        <h4>Petr Posmek</h4>
-        <a href="mailto:petr.posmek@santatrans.cz">petr.posmek@santatrans.cz</a>
-        <a href="tel:+420735749574">+420 735 749 574</a>
-      </div>
-      <div class="person">
-        <div class="person-role">Vedoucí střediska POP/POS &amp; KEG · Správa areálů</div>
-        <h4>Tomáš Varaja</h4>
-        <a href="mailto:tomas.varaja@santatrans.cz">tomas.varaja@santatrans.cz</a>
-        <a href="tel:+420739606088">+420 739 606 088</a>
-      </div>
-      <div class="person">
-        <div class="person-role">Vedoucí dopravy</div>
-        <h4>Lukáš Bolek</h4>
-        <a href="mailto:lukas.bolek@santatrans.cz">lukas.bolek@santatrans.cz</a>
-        <a href="tel:+420602176312">+420 602 176 312</a>
-      </div>
-    </div>
-
-    <div class="dept-label">Autoservis a myčka</div>
-    <div class="people-grid">
-      <div class="person">
-        <div class="person-role">Mistr autoservisu</div>
-        <h4>Lukáš Ondrák</h4>
-        <a href="mailto:lukas.ondrak@santatrans.cz">lukas.ondrak@santatrans.cz</a>
-        <a href="tel:+420724527337">+420 724 527 337</a>
-      </div>
-      <div class="person">
-        <div class="person-role">Mistr autoservisu</div>
-        <h4>Eduard Zlatník</h4>
-        <a href="mailto:eduard.zlatnik@santatrans.cz">eduard.zlatnik@santatrans.cz</a>
-        <a href="tel:+420724257571">+420 724 257 571</a>
-      </div>
-    </div>
-
-    <div class="dept-label">Vozový park</div>
-    <div class="people-grid">
-      <div class="person">
-        <div class="person-role">Správce vozového parku</div>
-        <h4>Petr Vehovský</h4>
-        <a href="mailto:petr.vehovsky@santatrans.cz">petr.vehovsky@santatrans.cz</a>
-        <a href="tel:+420724591754">+420 724 591 754</a>
-      </div>
-      <div class="person">
-        <div class="person-role">Správce vozového parku</div>
-        <h4>Zbyněk Růžička</h4>
-        <a href="mailto:zbynek.ruzicka@santatrans.cz">zbynek.ruzicka@santatrans.cz</a>
-        <a href="tel:+420603556996">+420 603 556 996</a>
-      </div>
-    </div>
-
-    <div class="dept-label">Pneuservis · prodejna ND · čerpací stanice</div>
-    <div class="people-grid">
-      <div class="person">
-        <div class="person-role">Mistr pneuservisu</div>
-        <h4>Leopold Vaněk</h4>
-        <a href="mailto:prodejna@santatrans.cz">prodejna@santatrans.cz</a>
-        <a href="tel:+420724965527">+420 724 965 527</a>
-      </div>
-    </div>
-
-    <div class="dept-label">Dispečink</div>
-    <div class="people-grid">
-      <div class="person">
-        <div class="person-role">Dispečink Krnov — non-stop</div>
-        <h4>Centrální dispečink</h4>
-        <a href="mailto:dispecink@santatrans.cz">dispecink@santatrans.cz</a>
-        <a href="tel:+420724328884">+420 724 328 884</a>
-      </div>
-      <div class="person">
-        <div class="person-role">Dispečink Mnichovo Hradiště — non-stop</div>
-        <h4>Dispečink MH</h4>
-        <a href="mailto:dispecink@santatrans.cz">dispecink@santatrans.cz</a>
-        <a href="tel:+420606767340">+420 606 767 340</a>
-      </div>
-    </div>
-
-    <div style="margin-top:48px;">
-      <div class="dept-label" style="padding-top:0;">Mapa</div>
-      <div class="map-wrap">
-        <iframe loading="lazy" title="Santa-Trans, Krnov"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.6508480762564!2d17.715391785466288!3d50.09282360757735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47118273c483e863%3A0xc1cc737e8b7b084c!2sVe+Vrbin%C4%9B+592%2F1%2C+Pod+Cvil%C3%ADnem%2C+794+01+Krnov!5e0!3m2!1scs!2scz!4v1561711996973!5m2!1scs!2scz">
-        </iframe>
-      </div>
-    </div>
-
+    <h2 class="section-title">Kontakty</h2>
   </div>
 </section>
-
+<section class="section section-alt">
+  <div class="container">
+    <div class="dept-label">Vedení</div>
+    <div class="people-grid">
+      <div class="person"><div class="person-role">Jednatel / ředitel</div><h4>René Novotný</h4><a href="tel:+420595601320">+420 595 601 320</a><a href="mailto:dispecink@santatrans.cz">dispecink@santatrans.cz</a></div>
+    </div>
+    <div class="dept-label">Dispečink Krnov</div>
+    <div class="people-grid">
+      <div class="person"><div class="person-role">Vedoucí dopravy</div><h4>Jan Filip</h4><a href="tel:+420724328884">+420 724 328 884</a></div>
+    </div>
+    <div class="dept-label">Provoz</div>
+    <div class="people-grid">
+      <div class="person"><div class="person-role">Autoservis</div><h4>Servis Krnov</h4><a href="tel:+420595601337">+420 595 601 337</a><a href="mailto:prodejna@santatrans.cz">prodejna@santatrans.cz</a></div>
+      <div class="person"><div class="person-role">Pneuservis</div><h4>Pneuservis Krnov</h4><a href="tel:+420595601320">+420 595 601 320</a></div>
+    </div>
+  </div>
+</section>
+<section class="section-sm">
+  <div class="container">
+    <div class="about-grid" style="gap:40px;">
+      <div>
+        <div class="eyebrow">Kde nás najdete</div>
+        <h2 class="section-title" style="font-size:1.4rem;">Areál Krnov</h2>
+        <p style="margin:10px 0 6px;">Ve Vrbině 592/1, Pod Cvilínem<br>794 01 Krnov</p>
+        <p style="margin-bottom:20px;">Po–Pá, 7:00–16:00 &nbsp;·&nbsp; <a href="tel:+420554601320" style="color:var(--blue-600);font-weight:600;">+420 554 601 320</a></p>
+      </div>
+      <div class="map-wrap">
+        <iframe loading="lazy" title="Santa-Trans, Krnov" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.6508480762564!2d17.715391785466288!3d50.09282360757735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47118273c483e863%3A0xc1cc737e8b7b084c!2sVe+Vrbin%C4%9B+592%2F1%2C+Pod+Cvil%C3%ADnem%2C+794+01+Krnov!5e0!3m2!1scs!2scz!4v1561711996973!5m2!1scs!2scz"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <div>
-        <div class="footer-logo"><img src="img/logo.png" alt="Santa-Trans"></div>
-        <p class="footer-tagline">Vnitrostátní i mezinárodní kamionová doprava. Dceřiná společnost Kofola a.s.</p>
-      </div>
-      <div>
-        <h4>Navigace</h4>
-        <a href="index.html">Úvod</a>
-        <a href="sluzby.html">Služby</a>
-        <a href="kariera.html">Kariéra</a>
-      </div>
-      <div>
-        <h4>Kontakt</h4>
-        <a href="tel:+420595601320">+420 595 601 320</a>
-        <a href="mailto:dispecink@santatrans.cz">dispecink@santatrans.cz</a>
-        <a href="https://cs-cz.facebook.com/santatrans.cz/" target="_blank" rel="noopener">Facebook</a>
-      </div>
+      <div><div class="footer-logo"><img src="img/logo.png" alt="Santa-Trans"></div><p class="footer-tagline">Vnitrostátní i mezinárodní kamionová doprava. Dceřiná společnost Kofola a.s. Areál Krnov, Ve Vrbině 592/1.</p></div>
+      <div><h4>Provozujeme</h4><a href="sluzby.html">Kamionová doprava</a><a href="sluzby.html#autoservis">Autoservis</a><a href="sluzby.html#pneuservis">Pneuservis</a><a href="sluzby.html#nafta">Čerpací stanice</a></div>
+      <div><h4>Kontakt</h4><a href="tel:+420595601320">+420 595 601 320</a><a href="mailto:dispecink@santatrans.cz">dispecink@santatrans.cz</a><a href="kariera.html">Kariéra</a><a href="https://cs-cz.facebook.com/santatrans.cz/" target="_blank" rel="noopener">Facebook</a></div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 Santa-Trans s.r.o. · Krnov · IČ 25377949</span>
-      <span>ISO 9001:2016 · <a href="gdpr.html" style="color:rgba(255,255,255,.45);">GDPR</a></span>
-    </div>
+    <div class="footer-bottom"><span>© 2026 Santa-Trans s.r.o. · Krnov · IČ 25377949</span><span>ISO 9001:2016 · <a href="gdpr.html" style="color:rgba(255,255,255,.45);">GDPR</a> · <a href="kariera.html" style="color:rgba(255,255,255,.45);">Kariéra</a></span></div>
   </div>
 </footer>
-
 <script src="cookies.js"></script>
 <script src="nav.js"></script>
+<script src="translate.js"></script>
 </body>
 </html>
