@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Santa-Trans ceny</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; background: #f0f4f8; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+  .card { background: #fff; border-radius: 12px; padding: 40px; width: 100%; max-width: 400px; box-shadow: 0 4px 24px rgba(0,0,0,.10); }
+  h1 { font-size: 1.3rem; color: #1a3a6e; margin-bottom: 8px; }
+  .sub { font-size: .85rem; color: #888; margin-bottom: 32px; }
+  label { display: block; font-size: .78rem; font-weight: 600; color: #444; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; margin-top: 20px; }
+  input[type=text], input[type=password], input[type=number] {
+    width: 100%; padding: 12px 14px; border: 1px solid #ddd; border-radius: 8px;
+    font-size: 1.1rem; color: #1a3a6e; font-weight: 600;
+    transition: border-color .15s;
+  }
+  input:focus { outline: none; border-color: #1a56db; }
+  .unit { font-size: .8rem; color: #888; margin-top: 4px; }
+  button {
+    width: 100%; margin-top: 28px; padding: 14px;
+    background: #1a56db; color: #fff; border: none; border-radius: 8px;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .15s;
+  }
+  button:hover { background: #1e40af; }
+  button:disabled { background: #9ab; cursor: not-allowed; }
+  .msg { margin-top: 16px; padding: 12px; border-radius: 8px; font-size: .9rem; font-weight: 600; text-align: center; display: none; }
+  .msg.ok { background: #d1fae5; color: #065f46; display: block; }
+  .msg.err { background: #fee2e2; color: #991b1b; display: block; }
+  #loginForm, #priceForm { }
+  #priceForm { display: none; }
+  .current { background: #eff6ff; border-radius: 8px; padding: 14px; margin-bottom: 24px; font-size: .9rem; color: #1e40af; }
+  .current strong { font-size: 1.1rem; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>⛽ Santa-Trans — Správa cen</h1>
+  <p class="sub">Aktualizace cen paliv na webu</p>
+
+  <div id="loginForm">
+    <label for="heslo">Heslo</label>
+    <input type="password" id="heslo" placeholder="••••••" autocomplete="current-password">
+    <button onclick="prihlasit()">Přihlásit se</button>
+    <div class="msg" id="loginMsg"></div>
+  </div>
+
+  <div id="priceForm">
+    <div class="current" id="currentPrices">Načítám aktuální ceny…</div>
+
+    <label for="nafta">Nafta B7</label>
+    <input type="number" id="nafta" step="0.01" min="0" max="99" placeholder="35.10">
+    <div class="unit">Kč / litr s DPH</div>
+
+    <label for="cng">CNG</label>
+    <input type="number" id="cng" step="0.01" min="0" max="99" placeholder="46.70">
+    <div class="unit">Kč / kg s DPH</div>
+
+    <button onclick="ulozit()" id="btnUlozit">💾 Uložit ceny</button>
+    <div class="msg" id="saveMsg"></div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, set, get } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+const HESLO = 'santatrans2024';
+const firebaseConfig = {
+  databaseURL: 'https://santatrans-web-default-rtdb.europe-west1.firebasedatabase.app'
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+function fmt(v) { return v ? String(v).replace('.', ',') : v; }
+
+window.prihlasit = function() {
+  const h = document.getElementById('heslo').value;
+  if (h === HESLO) {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('priceForm').style.display = 'block';
+    nacistCeny();
+  } else {
+    const msg = document.getElementById('loginMsg');
+    msg.textContent = 'Špatné heslo';
+    msg.className = 'msg err';
+  }
+};
+
+async function nacistCeny() {
+  try {
+    const snap = await get(ref(db, 'ceny'));
+    const d = snap.val() || {};
+    document.getElementById('nafta').value = d.DIESEL || '';
+    document.getElementById('cng').value = d.CNG || '';
+    document.getElementById('currentPrices').innerHTML =
+      `Aktuální ceny: Nafta <strong>${fmt(d.DIESEL) || '—'} Kč/l</strong> &nbsp;·&nbsp; CNG <strong>${fmt(d.CNG) || '—'} Kč/kg</strong>`;
+  } catch(e) {
+    document.getElementById('currentPrices').textContent = 'Nepodařilo se načíst ceny.';
+  }
+}
+
+window.ulozit = async function() {
+  const btn = document.getElementById('btnUlozit');
+  const msg = document.getElementById('saveMsg');
+  const nafta = document.getElementById('nafta').value;
+  const cng = document.getElementById('cng').value;
+
+  if (!nafta || !cng) {
+    msg.textContent = 'Vyplňte obě ceny.';
+    msg.className = 'msg err';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Ukládám…';
+  msg.className = 'msg';
+
+  try {
+    await set(ref(db, 'ceny'), {
+      DIESEL: nafta,
+      CNG: cng,
+      updated: new Date().toISOString()
+    });
+    msg.textContent = '✓ Ceny uloženy! Web se aktualizuje okamžitě.';
+    msg.className = 'msg ok';
+    document.getElementById('currentPrices').innerHTML =
+      `Aktuální ceny: Nafta <strong>${fmt(nafta)} Kč/l</strong> &nbsp;·&nbsp; CNG <strong>${fmt(cng)} Kč/kg</strong>`;
+  } catch(e) {
+    msg.textContent = 'Chyba při ukládání: ' + e.message;
+    msg.className = 'msg err';
+  }
+
+  btn.disabled = false;
+  btn.textContent = '💾 Uložit ceny';
+};
+
+document.getElementById('heslo').addEventListener('keydown', e => {
+  if (e.key === 'Enter') window.prihlasit();
+});
+</script>
+</body>
+</html>
