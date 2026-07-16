@@ -16,10 +16,14 @@
     }
     function load(){
           var x=new XMLHttpRequest();
+          // cache-busting: unikátní parametr donutí prohlížeč i Google vždy
+          // stáhnout čerstvá data, jinak se občas vrací stará (zacachovaná) odpověď
           var url=API+(API.indexOf('?')>-1?'&':'?')+'_ts='+Date.now();
           x.open('GET',url,true);
           x.timeout=5000;
-          try{x.setRequestHeader('Cache-Control','no-cache, no-store, must-revalidate');}catch(e){}
+          try{
+            x.setRequestHeader('Cache-Control','no-cache, no-store, must-revalidate');
+          }catch(e){}
           x.onload=function(){try{apply(JSON.parse(x.responseText));}catch(e){apply(F);}};
           x.onerror=x.ontimeout=function(){apply(F);};
           x.send();
