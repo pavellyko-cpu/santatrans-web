@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dokumenty — Santa-Trans s.r.o.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div>Nafta B7&nbsp;<strong id="tb-diesel">…</strong><span class="topbar-sep"></span>CNG&nbsp;<strong id="tb-cng">…</strong></div>
+    <div>Dispečink Krnov&nbsp;<a href="tel:+420724328884">+420 724 328 884</a></div>
+    <div class="lang-switch">
+      <button onclick="location.href='/en/dokumenty.html'">EN</button>
+      <button onclick="location.href='/de/dokumenty.html'">DE</button>
+      <button onclick="location.href='/pl/dokumenty.html'">PL</button>
+      <button onclick="location.href='/dokumenty.html'">CS</button>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo"><img src="img/logo.png" alt="Santa-Trans"></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Otevřít menu">☰ Menu</button>
+    <nav class="primary" id="primaryNav">
+      <a href="index.html">Úvod</a>
+      <a href="sluzby.html">Služby</a>
+      <a href="kariera.html">Kariéra</a>
+      <a href="dokumenty.html" class="active">Dokumenty</a>
+      <a href="kontakty.html">Kontakty</a>
+      <a href="kontakty.html" class="nav-cta">Napište nám</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container" style="max-width:720px;">
+
+    <div class="eyebrow">Ke stažení</div>
+    <h1 class="section-title">Dokumenty</h1>
+    <p class="section-sub">Firemní dokumenty, certifikáty a zásady společnosti Santa-Trans s.r.o.</p>
+
+    <div class="doc-list">
+      <div class="doc-item">
+        <span class="doc-name">Politika kvality (2018)</span>
+        <a href="docs/PolitikaKvality2018.docx" class="doc-dl">Stáhnout .docx</a>
+      </div>
+      <div class="doc-item">
+        <span class="doc-name">GDPR — ochrana osobních údajů</span>
+        <a href="gdpr.html" class="doc-dl">Zobrazit na webu</a>
+      </div>
+    </div>
+
+    <div style="height:40px;"></div>
+
+    <div class="eyebrow">Certifikace</div>
+    <h2 class="section-title" style="font-size:1.4rem;margin-bottom:20px;">ISO 9001:2016</h2>
+
+    <div class="about-grid" style="align-items:center;gap:40px;">
+      <div>
+        <p style="margin-bottom:16px;">Santa-Trans s.r.o. je držitelem certifikátu systému managementu kvality ČSN EN ISO 9001:2016, vydaného certifikačním orgánem TÜV SÜD Czech s.r.o. pro obor silniční nákladní doprava a spedice, servis silničních vozidel a servis POP/POS.</p>
+        <p style="margin-bottom:28px;">Certifikát potvrzuje, že naše procesy řízení kvality odpovídají mezinárodně uznávané normě a jsou pravidelně prověřovány dozorovými audity.</p>
+        <a href="img/certifikat-iso.jpg" target="_blank" rel="noopener" class="btn-secondary">Zobrazit certifikát v plné velikosti</a>
+      </div>
+      <div style="display:flex;justify-content:center;">
+        <a href="img/certifikat-iso.jpg" target="_blank" rel="noopener">
+          <img src="img/certifikat-iso.jpg" alt="Certifikát ISO 9001:2016"
+               style="max-width:300px;width:100%;border-radius:var(--radius);box-shadow:var(--shadow-lg);border:1px solid var(--border);">
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-logo"><img src="img/logo.png" alt="Santa-Trans"></div><p class="footer-tagline">Vnitrostátní i mezinárodní kamionová doprava. Dceřiná společnost Kofola a.s.</p></div>
+      <div><h4>Navigace</h4><a href="index.html">Úvod</a><a href="sluzby.html">Služby</a><a href="kariera.html">Kariéra</a><a href="kontakty.html">Kontakty</a></div>
+      <div><h4>Kontakt</h4><a href="tel:+420595601320">+420 595 601 320</a><a href="mailto:dispecink@santatrans.cz">dispecink@santatrans.cz</a><a href="https://cs-cz.facebook.com/santatrans.cz/" target="_blank" rel="noopener">Facebook</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Santa-Trans s.r.o. · Krnov · IČ 25377949</span>
+      <span><a href="gdpr.html" style="color:rgba(255,255,255,.45);">GDPR</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="data-loader.js"></script>
+<script src="cookies.js"></script>
+<script src="nav.js"></script>
+<script src="translate.js"></script>
+</body>
+</html>
