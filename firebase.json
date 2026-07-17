@@ -1,17 +1,24 @@
 {
   "hosting": {
     "public": ".",
-    "ignore": ["firebase.json", ".github", "**/.*", "**/node_modules/**"],
+    "ignore": [
+      "firebase.json",
+      ".github",
+      "netlify.toml",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "cleanUrls": true,
     "trailingSlash": false,
     "headers": [
       {
-        "source": "**/*.html",
-        "headers": [{"key": "Cache-Control", "value": "no-cache, no-store, must-revalidate"}]
-      },
-      {
-        "source": "**/*.js",
-        "headers": [{"key": "Cache-Control", "value": "no-cache, no-store, must-revalidate"}]
+        "source": "/data.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
       }
     ]
   }
