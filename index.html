@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="container">
@@ -29,8 +28,232 @@
   </div>
 </div>
 
-
 <!-- HEADER -->
 <header class="site-header">
   <div class="container header-inner">
     <a href="index.html" class="logo">
+      <img src="img/logo.png" alt="Santa-Trans">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Otevřít menu">☰ Menu</button>
+    <nav class="primary" id="primaryNav">
+      <a href="index.html" class="active">Úvod</a>
+      <a href="sluzby.html">Služby</a>
+      <a href="kariera.html">Kariéra</a>
+      <a href="kontakty.html">Kontakty</a>
+      <a href="kontakty.html" class="nav-cta">Napište nám</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag">Dceřiná společnost Kofola a.s. · od roku 1997</div>
+        <h1>Doprava, která <em>prostě funguje.</em></h1>
+        <p class="lead">Vnitrostátní i mezinárodní kamionová doprava, vlastní servis a zázemí pro cizí vozy. Tři depa, 77 vozidel, 160 lidí — každý den na cestách po celé ČR.</p>
+        <div class="btn-row">
+          <a href="kontakty.html" class="btn-primary">Napište nám</a>
+          <a href="sluzby.html" class="btn-secondary">Naše služby</a>
+        </div>
+      </div>
+      <div class="stat-panel">
+        <div class="stat-cell">
+          <div class="stat-val" id="km-month">574 091</div>
+          <div class="stat-lbl">km za měsíc</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-val" id="vehicle-count">77</div>
+          <div class="stat-lbl">vozidel</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-val" id="transit-count">33 581</div>
+          <div class="stat-lbl">přeprav 2025</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-val">ISO 9001</div>
+          <div class="stat-lbl">certifikace</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES OVERVIEW -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="eyebrow">Co nabízíme</div>
+    <h2 class="section-title">Servisní zázemí pro vlastní i cizí vozy</h2>
+    <p class="section-sub">V areálu Krnov provozujeme kompletní zázemí — přístupné i externím zákazníkům.</p>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3>Autoservis</h3>
+        <p>Opravy SCANIA, IVECO, VOLVO, MERCEDES. Geometrie, diagnostika WABCO, smluvní opravna Schwarzmüller.</p>
+        <a href="sluzby.html#autoservis" class="card-link">Více o servisu <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Pneuservis</h3>
+        <p>Přezutí, vyvážení, opravy včetně bočních průrazů. Michelin, Continental, Nokian, Barum, Goodyear.</p>
+        <a href="sluzby.html#pneuservis" class="card-link">Rezervovat termín <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h1v6H9zm5 0h1v6h-1z"/></svg>
+        </div>
+        <h3>Myčka</h3>
+        <p>Ruční i kartáčové mytí nákladních a dodávkových vozidel, dezinfekce návěsů. Po–Pá 6–22 hod.</p>
+        <a href="sluzby.html#mycka" class="card-link">Zjistit více <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4"/><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>
+        </div>
+        <h3>Prodejna náhradních dílů</h3>
+        <p>Díly pro nákladní vozidla, návěsy a přívěsy. Co nemáme skladem, seženeme.</p>
+        <a href="sluzby.html#nahradni-dily" class="card-link">Zjistit více <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <h3>Čerpací stanice — nafta</h3>
+        <p>Aditivovaná nafta B7 bez biosložky. Non-stop pro zákazníky s čipem. Dnes <strong style="color:var(--blue-700);" id="diesel-price">…</strong>.</p>
+        <a href="sluzby.html#nafta" class="card-link">Info o čipu <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>Čerpací stanice — CNG</h3>
+        <p>Non-stop, samoobslužná, osobní i TIR. Sleva při odběru čipu. Dnes <strong style="color:var(--blue-700);" id="cng-price">…</strong>.</p>
+        <a href="sluzby.html#cng" class="card-link">Zjistit více <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow">O nás</div>
+        <h2 class="section-title">Od 5 vozů LIAZ k jednomu z největších dopravců kraje</h2>
+        <p style="margin-bottom:16px;">Firma vznikla v roce 1997 jako dceřiná společnost Kofola a.s. se dvaceti zaměstnanci a pěti nákladními vozy. Postupně jsme vyrostli v jednoho z největších dopravců Moravskoslezského kraje.</p>
+        <p style="margin-bottom:28px;">Dnes zajišťujeme rozvoz a expedici nealkoholických nápojů skupiny Kofola i pro externí zákazníky. Depa v Krnově, Mnichově Hradišti a Stráži nad Ohří pokrývají celou ČR. Kvalitu procesů potvrzuje certifikát ISO 9001:2016.</p>
+        <a href="kontakty.html" class="btn-primary">Kontaktujte nás</a>
+      </div>
+      <div class="about-stats">
+        <div class="astat">
+          <div class="astat-val">160</div>
+          <div class="astat-lbl">zaměstnanců</div>
+        </div>
+        <div class="astat">
+          <div class="astat-val" id="vehicles-about">77</div>
+          <div class="astat-lbl">vozidel</div>
+        </div>
+        <div class="astat">
+          <div class="astat-val">3</div>
+          <div class="astat-lbl">depa po ČR</div>
+        </div>
+        <div class="astat">
+          <div class="astat-val">27 let</div>
+          <div class="astat-lbl">na trhu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFIKACE -->
+<section class="section">
+  <div class="container">
+    <div class="about-grid" style="align-items:center;">
+      <div>
+        <div class="eyebrow">Kvalita a důvěra</div>
+        <h2 class="section-title">Certifikace ISO 9001:2016</h2>
+        <p style="margin-bottom:16px;">Santa-Trans s.r.o. je držitelem certifikátu systému managementu kvality ČSN EN ISO 9001:2016, vydaného certifikačním orgánem TÜV SÜD Czech s.r.o. pro obor silniční nákladní doprava a spedice, servis silničních vozidel a servis POP/POS.</p>
+        <p style="margin-bottom:28px;">Certifikát potvrzuje, že naše procesy řízení kvality odpovídají mezinárodně uznávané normě a jsou pravidelně prověřovány dozorovými audity.</p>
+        <a href="img/certifikat-iso.jpg" target="_blank" rel="noopener" class="btn-secondary">Zobrazit certifikát v plné velikosti</a>
+      </div>
+      <div style="display:flex; justify-content:center;">
+        <a href="img/certifikat-iso.jpg" target="_blank" rel="noopener" style="display:block;">
+          <img src="img/certifikat-iso.jpg" alt="Certifikát ISO 9001:2016 - Santa-Trans s.r.o."
+               style="max-width:340px; width:100%; height:auto; border-radius:var(--radius); box-shadow:var(--shadow-lg); border:1px solid var(--border);">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP SECTION -->
+<section class="section-sm section-alt">
+  <div class="container">
+    <div class="about-grid" style="gap:40px;">
+      <div>
+        <div class="eyebrow">Kde nás najdete</div>
+        <h2 class="section-title" style="font-size:1.4rem;">Areál Krnov</h2>
+        <p style="margin:10px 0 6px;">Ve Vrbině 592/1, Pod Cvilínem<br>794 01 Krnov</p>
+        <p style="margin-bottom:20px;">Po–Pá, 7:00–16:00 &nbsp;·&nbsp; <a href="tel:+420554601320" style="color:var(--blue-600);font-weight:600;">+420 554 601 320</a></p>
+        <a href="kontakty.html" class="btn-secondary">Všechny kontakty</a>
+      </div>
+      <div class="map-wrap">
+        <iframe loading="lazy" title="Santa-Trans, Krnov"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.6508480762564!2d17.715391785466288!3d50.09282360757735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47118273c483e863%3A0xc1cc737e8b7b084c!2sVe+Vrbin%C4%9B+592%2F1%2C+Pod+Cvil%C3%ADnem%2C+794+01+Krnov!5e0!3m2!1scs!2scz!4v1561711996973!5m2!1scs!2scz">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="img/logo.png" alt="Santa-Trans"></div>
+        <p class="footer-tagline">Vnitrostátní i mezinárodní kamionová doprava. Dceřiná společnost Kofola a.s. Areál Krnov, Ve Vrbině 592/1.</p>
+      </div>
+      <div>
+        <h4>Provozujeme</h4>
+        <a href="sluzby.html">Kamionová doprava</a>
+        <a href="sluzby.html#autoservis">Autoservis</a>
+        <a href="sluzby.html#pneuservis">Pneuservis</a>
+        <a href="sluzby.html#nafta">Čerpací stanice</a>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <a href="tel:+420595601320">+420 595 601 320</a>
+        <a href="mailto:dispecink@santatrans.cz">dispecink@santatrans.cz</a>
+        <a href="kontakty.html">Vedení a oddělení</a>
+        <a href="https://cs-cz.facebook.com/santatrans.cz/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Santa-Trans s.r.o. · Krnov · IČ 25377949</span>
+      <span>ISO 9001:2016 · <a href="gdpr.html" style="color:rgba(255,255,255,.45);">GDPR</a> · <a href="kariera.html" style="color:rgba(255,255,255,.45);">Kariéra</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="data-loader.js"></script>
+<script src="cookies.js"></script>
+<script src="nav.js"></script>
+
+<script src="translate.js"></script>
+</body>
+</html>
