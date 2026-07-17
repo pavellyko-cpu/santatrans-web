@@ -4,23 +4,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kariéra — Santa-Trans s.r.o.</title>
-  <meta name="description" content="Volné pozice a kariéra v Santa-Trans s.r.o. Krnov. Pošlete nám životopis.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    .empty-card {
-      background: var(--gray-50);
-      border: 1px dashed var(--gray-300);
+    .jobs-cta-box {
+      background: var(--blue-50);
+      border: 1px solid var(--border-blue);
       border-radius: var(--radius-lg);
-      padding: 28px 24px;
-      color: var(--gray-500);
-      font-size: .9rem;
+      padding: 28px 32px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
     }
-    .empty-card a { color: var(--blue-600); font-weight: 600; }
+    .jobs-cta-text h3 { font-size: 1.1rem; font-weight: 600; color: var(--blue-900); margin-bottom: 6px; }
+    .jobs-cta-text p { font-size: .9rem; color: var(--text-secondary); line-height: 1.5; }
+    .jobs-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue-600); color: #fff;
+      border-radius: var(--radius-sm); padding: 12px 22px;
+      font-size: .9rem; font-weight: 600; white-space: nowrap;
+      text-decoration: none; transition: background .15s;
+      flex-shrink: 0;
+    }
+    .jobs-btn:hover { background: var(--blue-800); }
+    .section-divider {
+      display: flex; align-items: center; gap: 14px; margin: 36px 0;
+    }
+    .section-divider-line { flex: 1; height: 1px; background: var(--border); }
+    .section-divider-text { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--gray-400); }
+    .positions-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+    .position-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .position-card:hover { border-color: var(--border-blue); box-shadow: var(--shadow-sm); }
+    .pos-left { display: flex; align-items: center; gap: 14px; }
+    .pos-icon {
+      width: 42px; height: 42px; background: var(--blue-50);
+      border-radius: var(--radius); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; font-size: 1.3rem;
+    }
+    .pos-title { font-size: .95rem; font-weight: 600; color: var(--blue-900); margin-bottom: 4px; }
+    .pos-meta { font-size: .78rem; color: var(--gray-500); display: flex; gap: 12px; flex-wrap: wrap; }
+    .pos-link {
+      font-size: .82rem; font-weight: 600; color: var(--blue-600);
+      display: flex; align-items: center; gap: 4px;
+      text-decoration: none; flex-shrink: 0; transition: color .15s;
+    }
+    .pos-link:hover { color: var(--blue-800); }
+    .pos-note { font-size: .75rem; color: var(--gray-400); text-align: center; margin-top: 6px; }
+    .pos-note a { color: var(--blue-600); }
+    #positions-loading { color: var(--gray-400); font-size: .9rem; padding: 20px 0; }
   </style>
 </head>
 <body>
+<div id="google_translate_element"></div>
+
 <div class="topbar">
   <div class="container">
     <div>Nafta B7&nbsp;<strong id="tb-diesel">…</strong><span class="topbar-sep"></span>CNG&nbsp;<strong id="tb-cng">…</strong></div>
@@ -42,64 +89,52 @@
       <a href="index.html">Úvod</a>
       <a href="sluzby.html">Služby</a>
       <a href="kariera.html" class="active">Kariéra</a>
+      <a href="dokumenty.html">Dokumenty</a>
       <a href="kontakty.html">Kontakty</a>
       <a href="kontakty.html" class="nav-cta">Napište nám</a>
     </nav>
   </div>
 </header>
 
-<div class="page-hero">
-  <div class="container">
-    <div class="eyebrow">Přidejte se k nám</div>
-    <h1>Kariéra</h1>
-    <p>160 zaměstnanců, 77 vozidel, tři depa po celé ČR. Hledáme řidiče, techniky i pracovníky servisu.</p>
-  </div>
-</div>
-
 <section class="section">
-  <div class="container" style="max-width:720px;">
+  <div class="container" style="max-width:760px;">
 
-    <div class="eyebrow">Volné pozice</div>
-    <h2 class="section-title" style="margin-bottom:20px;">Aktuální nabídka</h2>
-    <div class="empty-card">
-      Aktuálně nemáme zveřejněné konkrétní pozice. Sledujte tuto stránku nebo nás kontaktujte na <a href="mailto:dispecink@santatrans.cz">dispecink@santatrans.cz</a> — rádi Vám poradíme.
+    <div class="eyebrow">Přidejte se k nám</div>
+    <h1 class="section-title">Kariéra v Santa-Trans</h1>
+    <p class="section-sub">160 zaměstnanců, 77 vozidel, tři depa po celé ČR. Hledáme řidiče, techniky i pracovníky servisu.</p>
+
+    <!-- CTA BOX -->
+    <div class="jobs-cta-box">
+      <div class="jobs-cta-text">
+        <h3>Zobrazit všechny aktuální pozice</h3>
+        <p>Kompletní seznam volných míst na jobs.cz — vždy aktuální, s možností přímé přihlášky.</p>
+      </div>
+      <a href="https://www.jobs.cz/prace/?q%5B%5D=SANTA%20-%20TRANS" target="_blank" rel="noopener" class="jobs-btn">
+        Otevřít jobs.cz →
+      </a>
     </div>
 
-    <div style="height:52px;"></div>
+    <!-- AKTUÁLNÍ POZICE -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-text">Aktuálně hledáme</div>
+      <div class="section-divider-line"></div>
+    </div>
 
-    <div class="eyebrow">Zašlete nám životopis</div>
-    <h2 class="section-title" style="margin-bottom:24px;">Nezávazná přihláška</h2>
-    <form action="mailto:dispecink@santatrans.cz" method="post" enctype="text/plain">
-      <div class="form-grid">
-        <div class="field">
-          <label for="jmeno">Jméno a příjmení</label>
-          <input id="jmeno" name="jmeno" type="text" placeholder="Jan Novák" required>
-        </div>
-        <div class="field">
-          <label for="email">E-mail</label>
-          <input id="email" name="email" type="email" placeholder="jan@example.cz" required>
-        </div>
-        <div class="field full">
-          <label for="predmet">O jakou pozici máte zájem</label>
-          <input id="predmet" name="predmet" type="text" placeholder="Řidič kamionu, technik servisu…">
-        </div>
-        <div class="field full">
-          <label for="zprava">Stručné představení</label>
-          <textarea id="zprava" name="zprava" rows="5" placeholder="Pár vět o Vás, zkušenostech a dostupnosti…"></textarea>
-        </div>
-        <div class="field full">
-          <label for="cv">Přiložit CV (nepovinné)</label>
-          <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx">
-        </div>
-      </div>
-      <button type="submit" class="btn-primary" style="margin-top:16px;border:none;cursor:pointer;">Odeslat přihlášku</button>
-    </form>
+    <div class="positions-list" id="positions-list">
+      <div id="positions-loading">Načítám aktuální pozice…</div>
+    </div>
+    <p class="pos-note">Pozice jsou načítány z <a href="https://www.jobs.cz/prace/?q%5B%5D=SANTA%20-%20TRANS" target="_blank" rel="noopener">jobs.cz</a>. Kliknutím na detail se dostanete přímo na inzerát.</p>
 
-    <div style="height:52px;"></div>
+    <div style="height:48px;"></div>
 
-  </div>
+    <!-- ŽIVOTOPIS -->
+    <div class="eyebrow">Nenašli jste svou pozici?</div>
+    <h2 class="section-title" style="font-size:1.4rem;margin-bottom:8px;">Pošlete nám životopis</h2>
+    <p style="margin-bottom:24px;color:var(--text-secondary);">Rádi se Vám ozveme, jakmile se uvolní vhodná pozice.</p>
+    <a href="mailto:dispecink@santatrans.cz?subject=Životopis — zájem o práci" class="btn-primary">Napsat e-mail →</a>
+
 </section>
-
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
@@ -122,11 +157,61 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Santa-Trans s.r.o. · Krnov · IČ 25377949</span>
-      <span>ISO 9001:2016 · <a href="gdpr.html" style="color:rgba(255,255,255,.45);">GDPR</a></span>
+      <span><a href="gdpr.html" style="color:rgba(255,255,255,.45);">GDPR</a></span>
     </div>
   </div>
 </footer>
 
+<script>
+// Načti pozice z Firebase
+(function(){
+  var DB = 'https://santatrans-web-default-rtdb.europe-west1.firebasedatabase.app/pozice.json';
+  var ICONS = { 'řidič': '🚛', 'technik': '🔧', 'mechanik': '🔧', 'servis': '⚙️', 'skladník': '📦', 'dispečer': '📋' };
+
+  function getIcon(title) {
+    var t = title.toLowerCase();
+    for (var k in ICONS) { if (t.includes(k)) return ICONS[k]; }
+    return '💼';
+  }
+
+  function renderPositions(pozice) {
+    var list = document.getElementById('positions-list');
+    if (!pozice || pozice.length === 0) {
+      list.innerHTML = '<div style="background:var(--gray-50);border:1px dashed var(--gray-200);border-radius:var(--radius-lg);padding:24px;color:var(--gray-500);font-size:.9rem;text-align:center;">Aktuálně nemáme zveřejněné konkrétní pozice. Sledujte jobs.cz nebo nás kontaktujte.</div>';
+      return;
+    }
+    list.innerHTML = pozice.map(function(p) {
+      return '<div class="position-card">' +
+        '<div class="pos-left">' +
+          '<div class="pos-icon">' + getIcon(p.nazev || '') + '</div>' +
+          '<div>' +
+            '<div class="pos-title">' + (p.nazev || '') + '</div>' +
+            '<div class="pos-meta">' +
+              (p.misto ? '<span>📍 ' + p.misto + '</span>' : '') +
+              (p.typ ? '<span>🕐 ' + p.typ + '</span>' : '') +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        (p.odkaz ? '<a href="' + p.odkaz + '" target="_blank" rel="noopener" class="pos-link">Detail →</a>' : '') +
+      '</div>';
+    }).join('');
+  }
+
+  var x = new XMLHttpRequest();
+  x.open('GET', DB + '?_ts=' + Date.now(), true);
+  x.timeout = 5000;
+  x.onload = function() {
+    try {
+      var data = JSON.parse(x.responseText);
+      renderPositions(Array.isArray(data) ? data : (data ? Object.values(data) : []));
+    } catch(e) { renderPositions([]); }
+  };
+  x.onerror = x.ontimeout = function() { renderPositions([]); };
+  x.send();
+})();
+</script>
+
+<script src="data-loader.js"></script>
 <script src="cookies.js"></script>
 <script src="nav.js"></script>
 <script src="translate.js"></script>
