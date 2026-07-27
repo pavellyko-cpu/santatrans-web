@@ -69,6 +69,7 @@
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getDatabase, ref, set, get } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
 const HESLO = 'santatrans2024';
 const firebaseConfig = {
@@ -77,6 +78,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+const auth = getAuth(app);
 
 function fmt(v) { return v ? String(v).replace('.', ',') : v; }
 
@@ -123,6 +125,7 @@ window.ulozit = async function() {
   msg.className = 'msg';
 
   try {
+    await signInAnonymously(auth);
     await set(ref(db, 'ceny'), {
       DIESEL: nafta,
       CNG: cng,
