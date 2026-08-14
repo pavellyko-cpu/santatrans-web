@@ -1,5 +1,5 @@
 (function(){
-    var FIREBASE='https://santatrans-web-default-rtdb.europe-west1.firebasedatabase.app/ceny.json';
+    var PRICES='https://script.google.com/macros/s/AKfycbzboESyGDt7_E4SHnL3SxddCeQbqKzfCSvmPWriLUyU8ozBIeyOEbob4gjQYBWUmMo0rg/exec';
     var F={CNG:'46,70',DIESEL:'35,10',KM:'574 091',T:'33 581',V:'77'};
     function fmt(v){return v?String(v).replace('.',','):null;}
     function fmtKM(v){return v?String(v).replace(/\B(?=(\d{3})+(?!\d))/g,' '):null;}
@@ -16,7 +16,7 @@
         set('km-month',km);set('vehicle-count',v);
         set('vehicles-about',v);set('transit-count',t);
     }
-    fetch(FIREBASE)
+    fetch(PRICES+'?cb='+Date.now())
         .then(function(r){return r.json();})
         .then(function(d){if(d&&d.DIESEL)apply(d);})
         .catch(function(){});
