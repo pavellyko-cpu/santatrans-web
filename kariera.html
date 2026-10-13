@@ -113,18 +113,6 @@
       </a>
     </div>
 
-    <!-- AKTUÁLNÍ POZICE -->
-    <div class="section-divider">
-      <div class="section-divider-line"></div>
-      <div class="section-divider-text">Aktuálně hledáme</div>
-      <div class="section-divider-line"></div>
-    </div>
-
-    <div class="positions-list" id="positions-list">
-      <div id="positions-loading">Načítám aktuální pozice…</div>
-    </div>
-    <p class="pos-note">Pozice jsou načítány z <a href="https://www.jobs.cz/prace/?q%5B%5D=SANTA%20-%20TRANS" target="_blank" rel="noopener">jobs.cz</a>. Kliknutím na detail se dostanete přímo na inzerát.</p>
-
     <div style="height:48px;"></div>
 
     <!-- ŽIVOTOPIS -->
@@ -163,55 +151,6 @@
     </div>
   </div>
 </footer>
-
-<script>
-(function(){
-  var DB = 'https://santatrans-web-default-rtdb.europe-west1.firebasedatabase.app/pozice.json';
-  var ICONS = { 'řidič': '🚛', 'ridic': '🚛', 'technik': '🔧', 'mechanik': '🔧', 'servis': '⚙️', 'skladník': '📦', 'skladnik': '📦', 'dispečer': '📋' };
-
-  function getIcon(title) {
-    var t = (title||'').toLowerCase();
-    for (var k in ICONS) { if (t.indexOf(k) >= 0) return ICONS[k]; }
-    return '💼';
-  }
-
-  function renderPositions(pozice) {
-    var list = document.getElementById('positions-list');
-    if (!pozice || pozice.length === 0) {
-      list.innerHTML = '<div style="background:var(--gray-50);border:1px dashed var(--gray-200);border-radius:var(--radius-lg);padding:24px;color:var(--gray-500);font-size:.9rem;text-align:center;">Aktuálně nemáme zveřejněné konkrétní pozice. Sledujte jobs.cz nebo nás kontaktujte.</div>';
-      return;
-    }
-    list.innerHTML = pozice.map(function(p) {
-      return '<div class="position-card">' +
-        '<div class="pos-left">' +
-          '<div class="pos-icon">' + getIcon(p.nazev) + '</div>' +
-          '<div>' +
-            '<div class="pos-title">' + (p.nazev || '') + '</div>' +
-            '<div class="pos-meta">' +
-              (p.misto ? '<span>📍 ' + p.misto + '</span>' : '') +
-              (p.plat ? '<span>💰 ' + p.plat + '</span>' : '') +
-              (p.typ ? '<span>🕐 ' + p.typ + '</span>' : '') +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-        (p.odkaz ? '<a href="' + p.odkaz + '" target="_blank" rel="noopener" class="pos-link">Detail →</a>' : '') +
-      '</div>';
-    }).join('');
-  }
-
-  var x = new XMLHttpRequest();
-  x.open('GET', DB + '?_ts=' + Date.now(), true);
-  x.timeout = 6000;
-  x.onload = function() {
-    try {
-      var data = JSON.parse(x.responseText);
-      renderPositions(Array.isArray(data) ? data : (data ? Object.values(data) : []));
-    } catch(e) { renderPositions([]); }
-  };
-  x.onerror = x.ontimeout = function() { renderPositions([]); };
-  x.send();
-})();
-</script>
 
 <script src="data-loader.js"></script>
 <script src="cookies.js"></script>
