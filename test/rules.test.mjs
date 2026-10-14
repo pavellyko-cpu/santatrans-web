@@ -58,9 +58,8 @@ function change(user, field, group, old, val, id = 'h1') {
 }
 
 describe('veřejné čtení', () => {
-  it('anonym čte /site a /pozice', async () => {
+  it('anonym čte /site', async () => {
     await assertSucceeds(anon().ref('site').get());
-    await assertSucceeds(anon().ref('pozice').get());
   });
   it('anonym nečte root, /ceny, /history, /admins, /config', async () => {
     await assertFails(anon().ref().get());
@@ -255,11 +254,12 @@ describe('/config', () => {
   });
 });
 
-describe('/pozice a ostatní cesty', () => {
-  it('/pozice zapisuje jen admin', async () => {
-    await assertSucceeds(as(ADMIN).ref('pozice').set([{ title: 'Řidič' }]));
-    await assertFails(as(USER).ref('pozice').set([]));
-    await assertFails(anon().ref('pozice').set([]));
+describe('ostatní cesty', () => {
+  it('/pozice je zavřené (kariéra odkazuje na jobs.cz)', async () => {
+    await assertFails(anon().ref('pozice').get());
+    await assertFails(as(ADMIN).ref('pozice').get());
+    await assertFails(as(OWNER).ref('pozice').set([{ title: 'Řidič' }]));
+    await assertFails(as(ADMIN).ref('pozice').set([{ title: 'Řidič' }]));
   });
   it('/ceny (starý admin) je zavřené', async () => {
     await assertFails(as(ADMIN).ref('ceny').set({ DIESEL: '1' }));

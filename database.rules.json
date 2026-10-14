@@ -29,10 +29,6 @@
         ".validate": false
       }
     },
-    "pozice": {
-      ".read": true,
-      ".write": "(auth != null && auth.token.email != null && root.child('admins').child(auth.token.email.toLowerCase().replace('.', ',')).val() === true)"
-    },
     "history": {
       ".read": "(auth != null && auth.token.email != null && root.child('admins').child(auth.token.email.toLowerCase().replace('.', ',')).val() === true)",
       ".indexOn": [
