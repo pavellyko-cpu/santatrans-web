@@ -17,6 +17,7 @@
         return s?group(String(Number(s))):null;
     }
     function set(id,v){var e=document.getElementById(id);if(e&&v)e.textContent=v;}
+    function unit(p,u){return p?p+' '+u+' '+vat:null;}
 
     // d = {DIESEL,CNG,KM,TRANSITS,VEHICLES}
     function apply(d){
@@ -24,8 +25,8 @@
         var diesel=d.DIESEL!=null?price(d.DIESEL):null;
         var cng=d.CNG!=null?price(d.CNG):null;
         var v=count(d.VEHICLES);
-        set('tb-diesel',diesel);set('tb-cng',cng);
-        set('diesel-price',diesel);set('cng-price',cng);
+        set('tb-diesel',unit(diesel,'Kč/l'));set('tb-cng',unit(cng,'Kč/kg'));
+        set('diesel-price',unit(diesel,'Kč/l'));set('cng-price',unit(cng,'Kč/kg'));
         set('diesel-price-srv',diesel);set('cng-price-srv',cng);
         set('km-month',count(d.KM));set('transit-count',count(d.TRANSITS));
         set('vehicle-count',v);set('vehicles-about',v);
