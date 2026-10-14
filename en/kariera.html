@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
   <style>
     .empty-card {
       background: var(--gray-50);
@@ -40,7 +40,7 @@
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="/en/index.html"  class="logo"><img src="img/logo.png" alt="Santa-Trans"></a>
+    <a href="/en/index.html"  class="logo"><img src="/img/logo.png" alt="Santa-Trans"></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Otevřít menu">☰ Menu</button>
     <nav class="primary" id="primaryNav">
       <a href="/en/index.html" >Home</a>
@@ -106,7 +106,7 @@
     <div class="doc-list">
       <div class="doc-item">
         <span class="doc-name">Quality Policy (2018)</span>
-        <a href="docs/PolitikaKvality2018.docx" class="doc-dl">Download .docx</a>
+        <a href="/docs/PolitikaKvality2018.docx" class="doc-dl">Download .docx</a>
       </div>
       <div class="doc-item">
         <span class="doc-name">GDPR — ochrana osobních údajů</span>
@@ -129,7 +129,7 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-logo"><img src="img/logo.png" alt="Santa-Trans"></div>
+        <div class="footer-logo"><img src="/img/logo.png" alt="Santa-Trans"></div>
         <p class="footer-tagline">Domestic and international truck transport. Subsidiary of Kofola a.s.</p>
       </div>
       <div>
@@ -152,8 +152,9 @@
   </div>
 </footer>
 
-<script src="cookies.js"></script>
-<script src="nav.js"></script>
-<script src="translate.js"></script>
+<script src="/data-loader.js"></script>
+<script src="/cookies.js"></script>
+<script src="/nav.js"></script>
+<script src="/translate.js"></script>
 </body>
 </html>

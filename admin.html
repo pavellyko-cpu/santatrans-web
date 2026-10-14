@@ -3,35 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin — Santa-Trans ceny</title>
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Santa-Trans</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: system-ui, sans-serif; background: #f0f4f8; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-  .card { background: #fff; border-radius: 12px; padding: 40px; width: 100%; max-width: 400px; box-shadow: 0 4px 24px rgba(0,0,0,.10); }
+  body { font-family: system-ui, sans-serif; background: #f0f4f8; min-height: 100vh; padding: 40px 16px; color: #1f2937; }
+  .card { background: #fff; border-radius: 12px; padding: 32px; width: 100%; max-width: 560px; margin: 0 auto 24px; box-shadow: 0 4px 24px rgba(0,0,0,.10); }
   h1 { font-size: 1.3rem; color: #1a3a6e; margin-bottom: 8px; }
-  .sub { font-size: .85rem; color: #888; margin-bottom: 32px; }
-  label { display: block; font-size: .78rem; font-weight: 600; color: #444; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; margin-top: 20px; }
-  input[type=text], input[type=password], input[type=number] {
+  h2 { font-size: 1.05rem; color: #1a3a6e; margin-bottom: 4px; }
+  .sub { font-size: .85rem; color: #888; margin-bottom: 24px; }
+  .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 24px; font-size: .85rem; color: #555; }
+  label { display: block; font-size: .78rem; font-weight: 600; color: #444; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; margin-top: 18px; }
+  input {
     width: 100%; padding: 12px 14px; border: 1px solid #ddd; border-radius: 8px;
-    font-size: 1.1rem; color: #1a3a6e; font-weight: 600;
-    transition: border-color .15s;
+    font-size: 1.05rem; color: #1a3a6e; font-weight: 600; transition: border-color .15s;
   }
   input:focus { outline: none; border-color: #1a56db; }
   .unit { font-size: .8rem; color: #888; margin-top: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
   button {
-    width: 100%; margin-top: 28px; padding: 14px;
+    width: 100%; margin-top: 24px; padding: 14px;
     background: #1a56db; color: #fff; border: none; border-radius: 8px;
     font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .15s;
   }
   button:hover { background: #1e40af; }
   button:disabled { background: #9ab; cursor: not-allowed; }
+  button.link { width: auto; margin: 12px 0 0; padding: 0; background: none; color: #1a56db; font-size: .85rem; font-weight: 500; }
+  button.link:hover { background: none; text-decoration: underline; }
   .msg { margin-top: 16px; padding: 12px; border-radius: 8px; font-size: .9rem; font-weight: 600; text-align: center; display: none; }
   .msg.ok { background: #d1fae5; color: #065f46; display: block; }
   .msg.err { background: #fee2e2; color: #991b1b; display: block; }
-  #loginForm, #priceForm { }
-  #priceForm { display: none; }
-  .current { background: #eff6ff; border-radius: 8px; padding: 14px; margin-bottom: 24px; font-size: .9rem; color: #1e40af; }
-  .current strong { font-size: 1.1rem; }
+  .hidden { display: none; }
+  .meta { font-size: .8rem; color: #888; margin-top: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: 12px; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid #eee; vertical-align: top; }
+  th { color: #666; font-weight: 600; }
+  td.val { white-space: nowrap; }
+  .table-wrap { overflow-x: auto; }
 </style>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -40,112 +49,274 @@
 </head>
 <body>
 <div class="card">
-  <h1>⛽ Santa-Trans — Správa cen</h1>
-  <p class="sub">Aktualizace cen paliv na webu</p>
+  <h1>⛽ Santa-Trans — Správa webu</h1>
+  <p class="sub">Ceny paliv a statistiky zobrazované na webu</p>
 
-  <div id="loginForm">
-    <label for="heslo">Heslo</label>
-    <input type="password" id="heslo" placeholder="••••••" autocomplete="current-password">
-    <button onclick="prihlasit()">Přihlásit se</button>
+  <div id="loading">Načítám…</div>
+
+  <form id="loginForm" class="hidden">
+    <label for="email">E-mail</label>
+    <input type="email" id="email" autocomplete="username" required>
+    <label for="password">Heslo</label>
+    <input type="password" id="password" autocomplete="current-password" required>
+    <button type="submit" id="btnLogin">Přihlásit se</button>
+    <button type="button" class="link" id="btnReset">Zapomenuté heslo</button>
     <div class="msg" id="loginMsg"></div>
+  </form>
+
+  <div id="denied" class="hidden">
+    <div class="msg err">Účet <span id="deniedEmail"></span> nemá oprávnění ke správě webu.</div>
+    <button type="button" id="btnLogout2">Odhlásit se</button>
   </div>
 
-  <div id="priceForm">
-    <div class="current" id="currentPrices">Načítám aktuální ceny…</div>
+  <form id="dataForm" class="hidden" novalidate>
+    <div class="bar">
+      <span>Přihlášen: <strong id="userEmail"></strong></span>
+      <button type="button" class="link" id="btnLogout" style="margin:0">Odhlásit</button>
+    </div>
 
-    <label for="nafta">Nafta B7</label>
-    <input type="number" id="nafta" step="0.01" min="0" max="99" placeholder="35.10">
-    <div class="unit">Kč / litr s DPH</div>
+    <h2>Ceny paliv</h2>
+    <div class="grid">
+      <div>
+        <label for="DIESEL">Nafta B7</label>
+        <input type="text" id="DIESEL" inputmode="decimal" placeholder="35,10">
+        <div class="unit">Kč / litr s DPH</div>
+      </div>
+      <div>
+        <label for="CNG">CNG</label>
+        <input type="text" id="CNG" inputmode="decimal" placeholder="46,70">
+        <div class="unit">Kč / kg s DPH</div>
+      </div>
+    </div>
 
-    <label for="cng">CNG</label>
-    <input type="number" id="cng" step="0.01" min="0" max="99" placeholder="46.70">
-    <div class="unit">Kč / kg s DPH</div>
+    <h2 style="margin-top:28px">Statistiky</h2>
+    <div class="grid">
+      <div>
+        <label for="KM">Km za měsíc</label>
+        <input type="text" id="KM" inputmode="numeric" placeholder="574091">
+        <div class="unit">za předchozí měsíc</div>
+      </div>
+      <div>
+        <label for="TRANSITS">Přepravy za rok</label>
+        <input type="text" id="TRANSITS" inputmode="numeric" placeholder="33581">
+        <div class="unit">za předchozí rok</div>
+      </div>
+      <div>
+        <label for="VEHICLES">Počet vozidel</label>
+        <input type="text" id="VEHICLES" inputmode="numeric" placeholder="77">
+      </div>
+    </div>
 
-    <button onclick="ulozit()" id="btnUlozit">💾 Uložit ceny</button>
+    <button type="submit" id="btnSave">💾 Uložit změny</button>
     <div class="msg" id="saveMsg"></div>
+    <div class="meta" id="lastUpdate"></div>
+  </form>
+</div>
+
+<div class="card hidden" id="historyCard">
+  <h2>Historie změn</h2>
+  <p class="sub" style="margin-bottom:0">Posledních 50 změn</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Kdy</th><th>Kdo</th><th>Položka</th><th>Stará → nová</th></tr></thead>
+      <tbody id="historyBody"></tbody>
+    </table>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getDatabase, ref, set, get } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
-import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import {
+  getAuth, connectAuthEmulator, onAuthStateChanged,
+  signInWithEmailAndPassword, sendPasswordResetEmail, signOut
+} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import {
+  getDatabase, connectDatabaseEmulator, ref, get, update, push, child,
+  query, orderByChild, limitToLast, onValue, serverTimestamp
+} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
-const HESLO = 'santatrans2024';
-const firebaseConfig = {
-  databaseURL: 'https://santatrans-web-default-rtdb.europe-west1.firebasedatabase.app'
+const FIELDS = {
+  DIESEL:   { group: 'prices', label: 'Nafta B7' },
+  CNG:      { group: 'prices', label: 'CNG' },
+  KM:       { group: 'stats',  label: 'Km za měsíc' },
+  TRANSITS: { group: 'stats',  label: 'Přepravy za rok' },
+  VEHICLES: { group: 'stats',  label: 'Počet vozidel' }
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const auth = getAuth(app);
+const $ = id => document.getElementById(id);
+const views = ['loading', 'loginForm', 'denied', 'dataForm', 'historyCard'];
+function show(...ids) { views.forEach(v => $(v).classList.toggle('hidden', !ids.includes(v))); }
+function msg(id, text, ok) { $(id).textContent = text; $(id).className = 'msg ' + (ok ? 'ok' : 'err'); }
+function clearMsg(id) { $(id).textContent = ''; $(id).className = 'msg'; }
 
-function fmt(v) { return v ? String(v).replace('.', ',') : v; }
+const emailKey = email => email.toLowerCase().replace(/\./g, ',');
 
-window.prihlasit = function() {
-  const h = document.getElementById('heslo').value;
-  if (h === HESLO) {
-    document.getElementById('loginForm').style.display = 'none';
-    document.getElementById('priceForm').style.display = 'block';
-    nacistCeny();
-  } else {
-    const msg = document.getElementById('loginMsg');
-    msg.textContent = 'Špatné heslo';
-    msg.className = 'msg err';
+// Vstup → uložený formát: ceny "35.10", statistiky "574091"; null = neplatné
+function normalize(field, raw) {
+  const s = raw.trim().replace(/\s/g, '');
+  if (FIELDS[field].group === 'prices') {
+    if (!/^\d{1,3}([.,]\d{1,2})?$/.test(s)) return null;
+    return Number(s.replace(',', '.')).toFixed(2);
   }
-};
-
-async function nacistCeny() {
-  try {
-    const snap = await get(ref(db, 'ceny'));
-    const d = snap.val() || {};
-    document.getElementById('nafta').value = d.DIESEL || '';
-    document.getElementById('cng').value = d.CNG || '';
-    document.getElementById('currentPrices').innerHTML =
-      `Aktuální ceny: Nafta <strong>${fmt(d.DIESEL) || '—'} Kč/l</strong> &nbsp;·&nbsp; CNG <strong>${fmt(d.CNG) || '—'} Kč/kg</strong>`;
-  } catch(e) {
-    document.getElementById('currentPrices').textContent = 'Nepodařilo se načíst ceny.';
-  }
+  if (!/^\d{1,9}$/.test(s)) return null;
+  return String(Number(s));
 }
 
-window.ulozit = async function() {
-  const btn = document.getElementById('btnUlozit');
-  const msg = document.getElementById('saveMsg');
-  const nafta = document.getElementById('nafta').value;
-  const cng = document.getElementById('cng').value;
+function display(field, v) {
+  if (v === '' || v == null) return '—';
+  if (FIELDS[field]?.group === 'prices') return String(v).replace('.', ',');
+  return String(v).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
 
-  if (!nafta || !cng) {
-    msg.textContent = 'Vyplňte obě ceny.';
-    msg.className = 'msg err';
+let auth, db, current = {}, stopHistory = null;
+
+async function init() {
+  const cfg = await (await fetch('/__/firebase/init.json')).json();
+  const app = initializeApp(cfg);
+  auth = getAuth(app);
+  auth.languageCode = 'cs';
+  db = getDatabase(app);
+  if (['localhost', '127.0.0.1'].includes(location.hostname)) {
+    connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
+    connectDatabaseEmulator(db, '127.0.0.1', 9000);
+  }
+  onAuthStateChanged(auth, onUser);
+}
+
+async function onUser(user) {
+  if (stopHistory) { stopHistory(); stopHistory = null; }
+  if (!user) { show('loginForm'); return; }
+  show('loading');
+  let isAdmin = false;
+  try {
+    isAdmin = (await get(ref(db, 'admins/' + emailKey(user.email)))).val() === true;
+  } catch (e) { /* bez oprávnění ke čtení = není admin */ }
+  if (!isAdmin) {
+    $('deniedEmail').textContent = user.email;
+    show('denied');
     return;
   }
+  $('userEmail').textContent = user.email;
+  clearMsg('saveMsg');
+  await loadSite();
+  show('dataForm', 'historyCard');
+  watchHistory();
+}
 
-  btn.disabled = true;
-  btn.textContent = 'Ukládám…';
-  msg.className = 'msg';
+async function loadSite() {
+  const site = (await get(ref(db, 'site'))).val() || {};
+  current = {};
+  for (const [f, def] of Object.entries(FIELDS)) {
+    const v = site[def.group]?.[f];
+    current[f] = typeof v === 'string' ? v : '';
+    $(f).value = display(f, current[f]).replace('—', '');
+  }
+  const m = site.meta;
+  $('lastUpdate').textContent = m
+    ? `Naposledy upraveno ${new Date(m.updatedAt).toLocaleString('cs-CZ')} (${m.updatedBy})`
+    : 'Data na webu zatím nejsou vyplněna.';
+}
 
+function watchHistory() {
+  const q = query(ref(db, 'history'), orderByChild('ts'), limitToLast(50));
+  stopHistory = onValue(q, snap => {
+    const rows = [];
+    snap.forEach(c => { rows.push(c.val()); });
+    rows.reverse();
+    const body = $('historyBody');
+    body.replaceChildren();
+    if (!rows.length) {
+      const tr = body.insertRow();
+      const td = tr.insertCell();
+      td.colSpan = 4;
+      td.textContent = 'Zatím žádné změny.';
+      return;
+    }
+    for (const h of rows) {
+      const tr = body.insertRow();
+      tr.insertCell().textContent = new Date(h.ts).toLocaleString('cs-CZ');
+      tr.insertCell().textContent = h.user;
+      tr.insertCell().textContent = FIELDS[h.field]?.label || h.field;
+      const td = tr.insertCell();
+      td.className = 'val';
+      td.textContent = `${display(h.field, h.old)} → ${display(h.field, h.new)}`;
+    }
+  }, () => {});
+}
+
+$('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  clearMsg('loginMsg');
+  $('btnLogin').disabled = true;
   try {
-    await signInAnonymously(auth);
-    await set(ref(db, 'ceny'), {
-      DIESEL: nafta,
-      CNG: cng,
-      updated: new Date().toISOString()
-    });
-    msg.textContent = '✓ Ceny uloženy! Web se aktualizuje okamžitě.';
-    msg.className = 'msg ok';
-    document.getElementById('currentPrices').innerHTML =
-      `Aktuální ceny: Nafta <strong>${fmt(nafta)} Kč/l</strong> &nbsp;·&nbsp; CNG <strong>${fmt(cng)} Kč/kg</strong>`;
-  } catch(e) {
-    msg.textContent = 'Chyba při ukládání: ' + e.message;
-    msg.className = 'msg err';
+    await signInWithEmailAndPassword(auth, $('email').value.trim(), $('password').value);
+    $('password').value = '';
+  } catch (err) {
+    msg('loginMsg', 'Přihlášení se nezdařilo. Zkontrolujte e-mail a heslo.', false);
+  }
+  $('btnLogin').disabled = false;
+});
+
+$('btnReset').addEventListener('click', async () => {
+  const email = $('email').value.trim();
+  if (!email) { msg('loginMsg', 'Vyplňte e-mail a klikněte znovu.', false); return; }
+  try {
+    await sendPasswordResetEmail(auth, email);
+  } catch (err) { /* neprozrazujeme, zda účet existuje */ }
+  msg('loginMsg', 'Pokud účet existuje, poslali jsme na e-mail odkaz pro nastavení hesla.', true);
+});
+
+$('btnLogout').addEventListener('click', () => signOut(auth));
+$('btnLogout2').addEventListener('click', () => signOut(auth));
+
+$('dataForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  clearMsg('saveMsg');
+  const user = auth.currentUser;
+  const me = user.email.toLowerCase();
+  const updates = {};
+  const changed = [];
+
+  for (const [f, def] of Object.entries(FIELDS)) {
+    const raw = $(f).value;
+    if (!raw.trim()) {
+      if (current[f]) { msg('saveMsg', `${def.label}: hodnotu nelze smazat.`, false); return; }
+      continue;
+    }
+    const v = normalize(f, raw);
+    if (v === null) {
+      msg('saveMsg', def.group === 'prices'
+        ? `${def.label}: zadejte cenu v Kč, např. 35,10.`
+        : `${def.label}: zadejte celé číslo.`, false);
+      return;
+    }
+    if (v === current[f]) continue;
+    updates[`site/${def.group}/${f}`] = v;
+    const id = push(child(ref(db), 'history')).key;
+    updates[`history/${id}`] = { ts: serverTimestamp(), user: me, field: f, old: current[f], new: v };
+    changed.push(def.label);
   }
 
-  btn.disabled = false;
-  btn.textContent = '💾 Uložit ceny';
-};
+  if (!changed.length) { msg('saveMsg', 'Žádná změna k uložení.', true); return; }
+  updates['site/meta'] = { updatedAt: serverTimestamp(), updatedBy: me };
 
-document.getElementById('heslo').addEventListener('keydown', e => {
-  if (e.key === 'Enter') window.prihlasit();
+  $('btnSave').disabled = true;
+  try {
+    await update(ref(db), updates);
+    msg('saveMsg', '✓ Uloženo: ' + changed.join(', '), true);
+    await loadSite();
+  } catch (err) {
+    const denied = /permission[_ ]denied/i.test(String(err && (err.code || err.message)));
+    msg('saveMsg', denied
+      ? 'Hodnota se mezitím změnila nebo nemáte oprávnění, načtěte stránku znovu.'
+      : 'Uložení se nezdařilo: ' + err.message, false);
+  }
+  $('btnSave').disabled = false;
+});
+
+init().catch(() => {
+  show('loginForm');
+  msg('loginMsg', 'Nepodařilo se načíst konfiguraci Firebase.', false);
 });
 </script>
 </body>
