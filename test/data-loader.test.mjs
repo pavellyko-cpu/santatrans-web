@@ -79,6 +79,22 @@ for (const lang of Object.keys(VAT)) {
   });
 }
 
+test('částečná data ve Firebase: CNG z Firebase, zbytek ze záložní tabulky', async () => {
+  const { text, urls, saved } = await run('cs', { site: { prices: { CNG: '48.00' }, meta: { updatedBy: 'x' } } });
+  assert.equal(urls.length, 2);
+  assert.equal(text['cng-price'], '48,00 Kč/kg s DPH');
+  assert.equal(text['tb-cng'], '48,00 Kč/kg s DPH');
+  assert.equal(text['tb-diesel'], '36,20 Kč/l s DPH');
+  assert.equal(text['km-month'], '600 000');
+  assert.equal(JSON.parse(saved).CNG, '48.00');
+});
+
+test('Firebase má přednost před tabulkou, i když je záloha dostupná', async () => {
+  const { text } = await run('cs', { site: { prices: { DIESEL: '35.10' } } });
+  assert.equal(text['tb-diesel'], '35,10 Kč/l s DPH');
+  assert.equal(text['tb-cng'], '47,90 Kč/kg s DPH');
+});
+
 test('neznámý jazyk → čeština', async () => {
   const { text } = await run('sk');
   assert.equal(text['tb-diesel'], '35,10 Kč/l s DPH');

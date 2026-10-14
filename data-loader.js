@@ -1,6 +1,6 @@
 (function(){
     var SITE='https://santatrans-web-default-rtdb.europe-west1.firebasedatabase.app/site.json';
-    // Záložní zdroj, dokud není /site v Firebase naplněné. Po naplnění odstranit.
+    // Záložní zdroj jen pro položky, které ještě nejsou ve Firebase /site. Po úplném naplnění odstranit.
     var LEGACY='https://script.google.com/macros/s/AKfycbzboESyGDt7_E4SHnL3SxddCeQbqKzfCSvmPWriLUyU8ozBIeyOEbob4gjQYBWUmMo0rg/exec';
     var CACHE='st-site';
     var VAT={cs:'s DPH',en:'incl. VAT',de:'inkl. MwSt.',pl:'z VAT'};
@@ -31,11 +31,14 @@
         set('km-month',count(d.KM));set('transit-count',count(d.TRANSITS));
         set('vehicle-count',v);set('vehicles-about',v);
     }
+    var KEYS=['DIESEL','CNG','KM','TRANSITS','VEHICLES'];
     function flatten(site){
-        if(!site||!site.prices||!site.prices.DIESEL)return null;
-        var p=site.prices,s=site.stats||{};
+        if(!site||(!site.prices&&!site.stats))return null;
+        var p=site.prices||{},s=site.stats||{};
         return {DIESEL:p.DIESEL,CNG:p.CNG,KM:s.KM,TRANSITS:s.TRANSITS,VEHICLES:s.VEHICLES};
     }
+    function complete(d){for(var i=0;i<KEYS.length;i++){if(!d||d[KEYS[i]]==null)return false;}return true;}
+    function hasAny(d){for(var i=0;i<KEYS.length;i++){if(d&&d[KEYS[i]]!=null)return true;}return false;}
     function save(d){try{localStorage.setItem(CACHE,JSON.stringify(d));}catch(e){}}
 
     var lang=(document.documentElement.lang||'cs').slice(0,2).toLowerCase();
@@ -49,11 +52,17 @@
         .then(function(r){return r.json();})
         .then(function(site){
             var d=flatten(site);
-            if(d)return d;
+            if(complete(d))return d;
+            // Chybějící položky doplní dočasně původní tabulka; co je ve Firebase, má vždy přednost.
             return fetch(LEGACY+'?cb='+Date.now())
                 .then(function(r){return r.json();})
-                .then(function(l){return l&&l.DIESEL?l:null;});
+                .then(function(l){
+                    d=d||{};
+                    if(l)for(var i=0;i<KEYS.length;i++){var k=KEYS[i];if(d[k]==null&&l[k]!=null)d[k]=l[k];}
+                    return d;
+                })
+                .catch(function(){return d;});
         })
-        .then(function(d){if(d){apply(d);save(d);}})
+        .then(function(d){if(hasAny(d)){apply(d);save(d);}})
         .catch(function(){});
 })();

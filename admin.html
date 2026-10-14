@@ -19,6 +19,7 @@
     font-size: 1.05rem; color: #1a3a6e; font-weight: 600; transition: border-color .15s;
   }
   input:focus { outline: none; border-color: #1a56db; }
+  input::placeholder { color: #b5bcc8; font-weight: 400; }
   .unit { font-size: .8rem; color: #888; margin-top: 4px; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
   @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
@@ -79,12 +80,12 @@
     <div class="grid">
       <div>
         <label for="DIESEL">Nafta B7</label>
-        <input type="text" id="DIESEL" inputmode="decimal" placeholder="35,10">
+        <input type="text" id="DIESEL" inputmode="decimal" placeholder="např. 35,10">
         <div class="unit">Kč / litr s DPH</div>
       </div>
       <div>
         <label for="CNG">CNG</label>
-        <input type="text" id="CNG" inputmode="decimal" placeholder="46,70">
+        <input type="text" id="CNG" inputmode="decimal" placeholder="např. 46,70">
         <div class="unit">Kč / kg s DPH</div>
       </div>
     </div>
@@ -93,17 +94,17 @@
     <div class="grid">
       <div>
         <label for="KM">Km za měsíc</label>
-        <input type="text" id="KM" inputmode="numeric" placeholder="574091">
+        <input type="text" id="KM" inputmode="numeric" placeholder="např. 574091">
         <div class="unit">za předchozí měsíc</div>
       </div>
       <div>
         <label for="TRANSITS">Přepravy za rok</label>
-        <input type="text" id="TRANSITS" inputmode="numeric" placeholder="33581">
+        <input type="text" id="TRANSITS" inputmode="numeric" placeholder="např. 33581">
         <div class="unit">za předchozí rok</div>
       </div>
       <div>
         <label for="VEHICLES">Počet vozidel</label>
-        <input type="text" id="VEHICLES" inputmode="numeric" placeholder="77">
+        <input type="text" id="VEHICLES" inputmode="numeric" placeholder="např. 77">
       </div>
     </div>
 
@@ -281,7 +282,8 @@ $('dataForm').addEventListener('submit', async e => {
     const raw = $(f).value;
     if (!raw.trim()) {
       if (current[f]) { msg('saveMsg', `${def.label}: hodnotu nelze smazat.`, false); return; }
-      continue;
+      msg('saveMsg', `${def.label}: vyplňte hodnotu (šedý text je jen ukázka). Všechny položky musí být vyplněné.`, false);
+      return;
     }
     const v = normalize(f, raw);
     if (v === null) {
