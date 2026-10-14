@@ -17,8 +17,9 @@
     "cleanUrls": true,
     "trailingSlash": false,
     "headers": [
-      {"source": "**/*.html", "headers": [{"key": "Cache-Control", "value": "no-cache, no-store, must-revalidate"}]},
-      {"source": "**/*.js", "headers": [{"key": "Cache-Control", "value": "no-cache, no-store, must-revalidate"}]}
+      {"regex": "^/[^.]*$", "headers": [{"key": "Cache-Control", "value": "no-cache"}]},
+      {"source": "**/*.html", "headers": [{"key": "Cache-Control", "value": "no-cache"}]},
+      {"source": "**/*.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}]}
     ]
   },
   "emulators": {
